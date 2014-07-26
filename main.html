@@ -1,0 +1,53 @@
+<html>
+<head>
+<script language="javascript" type="text/javascript">
+function updateLayer(layer) {
+	var layerID = 'banner-layer' + layer;
+	var ctx = document.getElementById(layerID).getContext('2d'); ctx.clearRect ( 0 , 0 , 100 , 150 );
+	var pattern = document.getElementById(layerID + '-pattern').value;
+	var colour =  document.getElementById(layerID + '-colour').value;
+	if(pattern == '') {}
+	else if(pattern == 'corner-tl') { ctx.fillStyle = colour; ctx.fillRect(0,0,50,75); }
+	else if(pattern == 'corner-tr') { ctx.fillStyle = colour; ctx.fillRect(50,0,50,75); }
+	else if(pattern == 'corner-bl') { ctx.fillStyle = colour; ctx.fillRect(0,75,50,75); }
+	else if(pattern == 'corner-br') { ctx.fillStyle = colour; ctx.fillRect(50,75,50,75); }
+}
+</script>
+</head>
+<body>
+	<form>
+		<select id="banner-layer1-pattern" onchange="updateLayer(1)">
+			<option value="">Blank</option>
+			<option value="corner-tl">Top Left Corner</option>
+			<option value="corner-tr">Top Right Corner</option>
+			<option value="corner-bl">Bottom Left Corner</option>
+			<option value="corner-br">Bottom Right Corner</option>
+		</select>
+		<select id="banner-layer1-colour" onchange="updateLayer(1)">
+			<option value"#000000">Black</option>
+			<option value"#00FFFF">Red</option>
+			<option value"#FF00FF">Green</option>
+			<option value"#FFFF00">Blue</option>
+		</select>
+
+		<select id="banner-layer2-pattern" onchange="updateLayer(2)">
+			<option value="">Blank</option>
+			<option value="corner-tl">Top Left Corner</option>
+			<option value="corner-tr">Top Right Corner</option>
+			<option value="corner-bl">Bottom Left Corner</option>
+			<option value="corner-br">Bottom Right Corner</option>
+		</select>
+		<select id="banner-layer2-colour" onchange="updateLayer(2)">
+			<option value"#000000">Black</option>
+			<option value"#00FFFF">Red</option>
+			<option value"#FF00FF">Green</option>
+			<option value"#FFFF00">Blue</option>
+		</select>
+	</form>
+
+	<div style="position: relative;">
+ 		<canvas id="banner-layer1" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+ 		<canvas id="banner-layer2" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
+	</div>
+</body>
+</html>
