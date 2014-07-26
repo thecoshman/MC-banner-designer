@@ -68,6 +68,22 @@ function updateLayer(layer) {
 	else if(pattern == 'third-right') { ctx.fillStyle = colour; ctx.fillRect(width - (width/3), 0, width/3, height); }
 	else if(pattern == 'line-vertical') { ctx.fillStyle = colour; ctx.fillRect(width/3, 0, width/3, height); }
 	else if(pattern == 'line-horizontal') { ctx.fillStyle = colour; ctx.fillRect(0, (height - (height/6))/2, 100, height/6); }
+	else if(pattern == 'tl-to-br'){ 
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width, height);
+		ctx.lineWidth = width/5;
+		ctx.strokeStyle = colour;
+		ctx.stroke();
+	}
+	else if(pattern == 'bl-to-tr'){ 
+		ctx.beginPath();
+		ctx.moveTo(0, height);
+		ctx.lineTo(width, 0);
+		ctx.lineWidth = width/5;
+		ctx.strokeStyle = colour;
+		ctx.stroke();
+	}
 	else if(pattern == 'corner-tl') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width/2, height/2); }
 	else if(pattern == 'corner-tr') { ctx.fillStyle = colour; ctx.fillRect(width/2, 0, width/2, height/2); }
 	else if(pattern == 'corner-bl') { ctx.fillStyle = colour; ctx.fillRect(0, height/2, width/2, height/2); }
@@ -118,6 +134,8 @@ function updateLayer(layer) {
 			<option value="third-right">Right Third</option>
 			<option value="line-vertical">Vertical Line</option>
 			<option value="line-horizontal">Horizontal Line</option>
+			<option value="tl-to-br">Top Left to Bottom Right</option>
+			<option value="bl-to-tr">Bottom Left to Top Right</option>
 			<option value="corner-tl">Top Left Corner</option>
 			<option value="corner-tr">Top Right Corner</option>
 			<option value="corner-bl">Bottom Left Corner</option>
