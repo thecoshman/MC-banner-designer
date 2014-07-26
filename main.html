@@ -45,9 +45,13 @@ function addLayer(layer){
 }
 function updateLayer(layer) {
 	var layerID = 'banner-layer' + layer;
-	var ctx = document.getElementById(layerID).getContext('2d'); ctx.clearRect ( 0 , 0 , 100 , 150 );
+	var canvas = document.getElementById(layerID);
+	var ctx = canvas.getContext('2d');
+	ctx.clearRect ( 0 , 0 , 100 , 150 );
 	var pattern = document.getElementById(layerID + '-pattern').value;
 	var colour =  document.getElementById(layerID + '-colour').value;
+	var width = canvas.width;
+	var height = canvas.height
 	if(pattern == '') {
 		if(layerPresent(layer + 1) && !layerPresent(layer + 2)){
 			// I'm the penultimate layer
@@ -58,16 +62,16 @@ function updateLayer(layer) {
 		}
 		return;
 	}
-	else if(pattern == 'third-top') { ctx.fillStyle = colour; ctx.fillRect(0,0,100,75); }
-	else if(pattern == 'third-bottom') { ctx.fillStyle = colour; ctx.fillRect(0,75,100,75); }
-	else if(pattern == 'third-left') { ctx.fillStyle = colour; ctx.fillRect(0,0,33,150); }
-	else if(pattern == 'third-right') { ctx.fillStyle = colour; ctx.fillRect(67,0,33,150); }
-	else if(pattern == 'line-vertical') { ctx.fillStyle = colour; ctx.fillRect(33,0,34,150); }
-	else if(pattern == 'line-horizontal') { ctx.fillStyle = colour; ctx.fillRect(0,59,100,33); }
-	else if(pattern == 'corner-tl') { ctx.fillStyle = colour; ctx.fillRect(0,0,50,75); }
-	else if(pattern == 'corner-tr') { ctx.fillStyle = colour; ctx.fillRect(50,0,50,75); }
-	else if(pattern == 'corner-bl') { ctx.fillStyle = colour; ctx.fillRect(0,75,50,75); }
-	else if(pattern == 'corner-br') { ctx.fillStyle = colour; ctx.fillRect(50,75,50,75); }
+	else if(pattern == 'third-top') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width, height/3); }
+	else if(pattern == 'third-bottom') { ctx.fillStyle = colour; ctx.fillRect(0, height - (height/3), width, height/3); }
+	else if(pattern == 'third-left') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width/3, height); }
+	else if(pattern == 'third-right') { ctx.fillStyle = colour; ctx.fillRect(width - (width/3), 0, width/3, height); }
+	else if(pattern == 'line-vertical') { ctx.fillStyle = colour; ctx.fillRect(width/3, 0, width/3, height); }
+	else if(pattern == 'line-horizontal') { ctx.fillStyle = colour; ctx.fillRect(0, (height - (height/6)) /2, 100, height/6); }
+	else if(pattern == 'corner-tl') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width/2, height/2); }
+	else if(pattern == 'corner-tr') { ctx.fillStyle = colour; ctx.fillRect(width/2, 0, width/2, height/2); }
+	else if(pattern == 'corner-bl') { ctx.fillStyle = colour; ctx.fillRect(0, height/2, width/2, height/2); }
+	else if(pattern == 'corner-br') { ctx.fillStyle = colour; ctx.fillRect(width/2, height/2, width/2, height/2); }
 	if(!layerPresent(layer + 1)){
 		addLayer(layer + 1);
 	}
