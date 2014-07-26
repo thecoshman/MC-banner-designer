@@ -6,16 +6,17 @@ function layerPresent(layer) {
 	var element = document.getElementById(layerID + '-pattern')
 	return element != null;
 }
-function removeLayer(layer){
-	var layerID = 'banner-layer' + (layer + 1);
+function hardRemoveLayer(layer){
+	// removes a layer, but does no clean up (such as shunting things around) should only be used to delete the last layer
+	var layerID = 'banner-layer' + layer;
 	var pattern = document.getElementById(layerID + '-pattern');
 	var colour =  document.getElementById(layerID + '-colour');
 	var canvas =  document.getElementById(layerID);
-	if(pattern != null && pattern.value == ''){
-		nextPattern.parentNode.removeChild(nextPattern);
-		colour.parentNode.removeChild(colour);
-		canvas.parentNode.removeChild(canvas);
-	}
+	if(pattern != null){ pattern.parentNode.removeChild(pattern); }
+	if(colour != null){ colour.parentNode.removeChild(colour); }
+	if(canvas != null){ canvas.parentNode.removeChild(canvas); }
+	var brake = document.getElementById('banner-options').lastChild;
+	brake.parentNode.removeChild(brake);
 }
 function addLayer(layer){
 	var newLayerId = 'banner-layer' + layer
@@ -48,8 +49,12 @@ function updateLayer(layer) {
 	var pattern = document.getElementById(layerID + '-pattern').value;
 	var colour =  document.getElementById(layerID + '-colour').value;
 	if(pattern == '') {
-		if(!layerPresent(layer + 1)){
-			removeLayer(layer);
+		if(layerPresent(layer + 1) && !layerPresent(layer + 2)){
+			// I'm the penultimate layer
+			var lastLayerPattern = document.getElementById('banner-layer' + (layer + 1) + '-pattern').value;
+			if(lastLayerPattern == ''){
+				hardRemoveLayer(layer + 1);
+			}
 		}
 		return;
 	}
