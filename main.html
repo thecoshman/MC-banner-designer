@@ -95,10 +95,42 @@ function updateLayer(layer) {
     		ctx.fillRect(lineWidth/2 + (i * lineWidth), 0, lineWidth, height);
 		}
 	}
+	else if(pattern == 'cross-diaganol') {
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width, height);
+		ctx.lineWidth = width/5;
+		ctx.strokeStyle = colour;
+		ctx.moveTo(0, height);
+		ctx.lineTo(width, 0);
+		ctx.lineWidth = width/5;
+		ctx.strokeStyle = colour;
+		ctx.stroke();
+	}
 	else if(pattern == 'cross-streight') { ctx.fillStyle = colour; ctx.fillRect((width - (width/5))/2, 0, width/5, height); ctx.fillRect(0, (height - (height/6)) /2, 100, height/6); }
 	if(!layerPresent(layer + 1)){
 		addLayer(layer + 1);
 	}
+	else if(pattern == 'half-tl') {
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width, 0);
+		ctx.lineTo(0, height);
+		ctx.lineTo(0, 0);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
+	else if(pattern == 'half-tr') {
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width, 0);
+		ctx.lineTo(width, height);
+		ctx.lineTo(0, 0);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
+	else if(pattern == 'half-left'){ ctx.fillStyle = colour; ctx.fillRect(0, 0, width/2, height); }
+	else if(pattern == 'half-right'){ ctx.fillStyle = colour; ctx.fillRect(width/2, 0, width/2, height); }
 	else if(pattern == 'solid') {ctx.fillStyle = colour; ctx.fillRect(0, 0, width, height); }
 }
 </script>
@@ -106,6 +138,7 @@ function updateLayer(layer) {
 <body>
 	<p>Yeah, I know this is crude, it's a work in progress.</p>
 	<p>View the source on <a href="https://github.com/thecoshman/MC-banner-designer">github</a> if you like.</p>
+	<p>Not sure why, if you slect the 'half' pattern first time, it doesn't swap to it correctly, select something else first and it's fine.</p>
 	<form id="banner-options">
 		<input type="hidden" id="banner-layer0-pattern" value="solid"></input>
 		Background Colour: <select id="banner-layer0-colour" onchange="updateLayer(0)">
@@ -141,7 +174,12 @@ function updateLayer(layer) {
 			<option value="corner-bl">Bottom Left Corner</option>
 			<option value="corner-br">Bottom Right Corner</option>
 			<option value="stripes-vertical">Vertical Stripes</option>
+			<option value="cross-diaganol">Diaganol Lines Cross</option>
 			<option value="cross-streight">Streight Lines Cross</option>
+			<option value="half-tl">Top Left Half</option>
+			<option value="half-tr">Top Right Half</option>
+			<option value="half-left">Left Half</option>
+			<option value="half-right">Right Half</option>
 		</select><select id="banner-layer1-colour" onchange="updateLayer(1)">
 			<option value"#191919">Black</option>
 			<option value"#993333">Red</option>
@@ -161,7 +199,6 @@ function updateLayer(layer) {
 			<option value"#FFFFFF">White</option>
 		</select>
 	</form>
-
 	<div id="banner-layers" style="position: relative;">
  		<canvas id="banner-layer0" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
  		<canvas id="banner-layer1" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
