@@ -234,6 +234,22 @@ function updateLayer(layer) {
 		ctx.fillStyle = colour;
 		ctx.fill();		
 	}
+	else if(pattern == 'pattern-bricks'){
+		ctx.fillStyle = colour;
+		var brickGap = height/50;
+		var brickHeight = height/10 - brickGap;
+		var brickWidth = width/4 - brickGap;
+		for(i = 0; i < 10; i += 2){
+			for(j = 0; j < 4; j++){
+				ctx.fillRect((brickWidth + brickGap) * j, (brickHeight + brickGap) * i, brickWidth, brickHeight);
+			}
+		}
+		for(i = 1; i < 10; i += 2){
+			for(j = 0; j < 5; j++){
+				ctx.fillRect(((brickWidth + brickGap) * j) - ((brickWidth + brickGap) / 2), (brickHeight + brickGap) * i, brickWidth, brickHeight);
+			}
+		}
+	}
 	else if(pattern == 'solid') {ctx.fillStyle = colour; ctx.fillRect(0, 0, width, height); }
 }
 </script>
@@ -241,7 +257,7 @@ function updateLayer(layer) {
 <body>
 	<p>Yeah, I know this is crude, it's a work in progress.</p>
 	<p>View the source on <a href="https://github.com/thecoshman/MC-banner-designer">github</a> if you like.</p>
-	<p>Not sure why, if you slect the 'half' pattern first time, it doesn't swap to it correctly, select something else first and it's fine.</p>
+	<p>Not sure why, if you slect some of the patterns first time, it doesn't swap to it correctly, select something else and then it's fine.</p>
 	<form id="banner-options">
 		<input type="hidden" id="banner-layer0-pattern" value="solid"></input>
 		Background Colour: <select id="banner-layer0-colour" onchange="updateLayer(0)">
@@ -291,6 +307,7 @@ function updateLayer(layer) {
 			<option value="middle-dot">Dot</option>
 			<option value="border-strieght">Border</option>
 			<option value="border-triangles">Border Triangles</option>
+			<option value="pattern-bricks">Bricks</option>
 		</select><select id="banner-layer1-colour" onchange="updateLayer(1)">
 			<option value"#191919">Black</option>
 			<option value"#993333">Red</option>
