@@ -131,6 +131,50 @@ function updateLayer(layer) {
 	}
 	else if(pattern == 'half-left'){ ctx.fillStyle = colour; ctx.fillRect(0, 0, width/2, height); }
 	else if(pattern == 'half-right'){ ctx.fillStyle = colour; ctx.fillRect(width/2, 0, width/2, height); }
+	else if(pattern == 'triangle-up'){
+		ctx.beginPath();
+		ctx.moveTo(0, height);
+		ctx.lineTo(width/2, height/2);
+		ctx.lineTo(width, height);
+		ctx.lineTo(0, height);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
+	else if(pattern == 'triangle-down'){
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width/2, height/2);
+		ctx.lineTo(width, 0);
+		ctx.lineTo(0, 0);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
+	else if(pattern == 'trangle-triple-bottom'){
+		ctx.beginPath();
+		ctx.moveTo(0, height);
+		ctx.lineTo(width/6, height - (height/8));
+		ctx.lineTo(width/3, height);
+		ctx.lineTo(width/2, height - (height/8));
+		ctx.lineTo(width*2/3, height);
+		ctx.lineTo(width - (width/6), height - (height/8));
+		ctx.lineTo(width, height);
+		ctx.lineTo(0, height);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
+	else if(pattern == 'trangle-triple-top'){
+		ctx.beginPath();
+		ctx.moveTo(0, 0);
+		ctx.lineTo(width/6, height/8);
+		ctx.lineTo(width/3, 0);
+		ctx.lineTo(width/2, height/8);
+		ctx.lineTo(width*2/3, 0);
+		ctx.lineTo(width - (width/6), height/8);
+		ctx.lineTo(width, 0);
+		ctx.lineTo(0, 0);
+		ctx.fillStyle = colour;
+		ctx.fill();
+	}
 	else if(pattern == 'solid') {ctx.fillStyle = colour; ctx.fillRect(0, 0, width, height); }
 }
 </script>
@@ -180,6 +224,10 @@ function updateLayer(layer) {
 			<option value="half-tr">Top Right Half</option>
 			<option value="half-left">Left Half</option>
 			<option value="half-right">Right Half</option>
+			<option value="triangle-up">Triangle Point Up</option>
+			<option value="triangle-down">Triangle Point Down</option>
+			<option value="trangle-triple-bottom">Three Triangles Bottom</option>
+			<option value="trangle-triple-top">Three Triangles Top</option>
 		</select><select id="banner-layer1-colour" onchange="updateLayer(1)">
 			<option value"#191919">Black</option>
 			<option value"#993333">Red</option>
