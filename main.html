@@ -183,7 +183,13 @@ function updateLayer(layer) {
 		ctx.lineTo(width/2, height-(height/6));
 		ctx.lineTo(width/6, height/2);
 		ctx.fillStyle = colour;
-		ctx.fill();		
+		ctx.fill();
+	}
+	else if(pattern == 'middle-dot'){
+		ctx.beginPath();
+		ctx.arc(width/2, height/2, width/4, 0, Math.PI*2,true);
+		ctx.fillStyle = colour;
+		ctx.fill();
 	}
 	else if(pattern == 'border-strieght'){
 		ctx.beginPath();
@@ -282,6 +288,7 @@ function updateLayer(layer) {
 			<option value="trangle-triple-bottom">Three Triangles Bottom</option>
 			<option value="trangle-triple-top">Three Triangles Top</option>
 			<option value="middle-diamond">Diamond</option>
+			<option value="middle-dot">Dot</option>
 			<option value="border-strieght">Border</option>
 			<option value="border-triangles">Border Triangles</option>
 		</select><select id="banner-layer1-colour" onchange="updateLayer(1)">
