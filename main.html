@@ -67,11 +67,23 @@ function updateLayer(layer) {
 	else if(pattern == 'third-left') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width/3, height); }
 	else if(pattern == 'third-right') { ctx.fillStyle = colour; ctx.fillRect(width - (width/3), 0, width/3, height); }
 	else if(pattern == 'line-vertical') { ctx.fillStyle = colour; ctx.fillRect(width/3, 0, width/3, height); }
-	else if(pattern == 'line-horizontal') { ctx.fillStyle = colour; ctx.fillRect(0, (height - (height/6)) /2, 100, height/6); }
+	else if(pattern == 'line-horizontal') { ctx.fillStyle = colour; ctx.fillRect(0, (height - (height/6))/2, 100, height/6); }
 	else if(pattern == 'corner-tl') { ctx.fillStyle = colour; ctx.fillRect(0, 0, width/2, height/2); }
 	else if(pattern == 'corner-tr') { ctx.fillStyle = colour; ctx.fillRect(width/2, 0, width/2, height/2); }
 	else if(pattern == 'corner-bl') { ctx.fillStyle = colour; ctx.fillRect(0, height/2, width/2, height/2); }
 	else if(pattern == 'corner-br') { ctx.fillStyle = colour; ctx.fillRect(width/2, height/2, width/2, height/2); }
+	else if(pattern == 'stripes-vertical') {
+		ctx.fillStyle = colour;
+		var lineWidth = width/8;
+		for (i = 0; i < 7; i+=2) { 
+    		ctx.fillRect(lineWidth/2 + (i * lineWidth), 0, lineWidth, height);
+		}
+		//ctx.fillRect(lineWidth/2 + (0 * lineWidth), 0, lineWidth, height);
+		//ctx.fillRect(lineWidth/2 + (2 * lineWidth), 0, lineWidth, height);
+		//ctx.fillRect(lineWidth/2 + (4 * lineWidth), 0, lineWidth, height);
+		//ctx.fillRect(lineWidth/2 + (6 * lineWidth), 0, lineWidth, height);
+	}
+	else if(pattern == 'cross-streight') { ctx.fillStyle = colour; ctx.fillRect((width - (width/5))/2, 0, width/5, height); ctx.fillRect(0, (height - (height/6)) /2, 100, height/6); }
 	if(!layerPresent(layer + 1)){
 		addLayer(layer + 1);
 	}
@@ -79,7 +91,9 @@ function updateLayer(layer) {
 </script>
 </head>
 <body>
-	<p>Yeah, I know this is crude, it's a work in progress. View the source on <a href="https://github.com/thecoshman/MC-banner-designer">github</a> if you like.</p>
+	<p>Yeah, I know this is crude, it's a work in progress.</p>
+	<p>View the source on <a href="https://github.com/thecoshman/MC-banner-designer">github</a> if you like.</p>
+	<p>I am aware that a few colours do not work when you select them... not sure why. (Light Grey, Lime Green and Light Blue</p>
 	<form id="banner-options">
 		<select id="banner-layer1-pattern" onchange="updateLayer(1)">
 			<option value="">Blank</option>
@@ -93,6 +107,8 @@ function updateLayer(layer) {
 			<option value="corner-tr">Top Right Corner</option>
 			<option value="corner-bl">Bottom Left Corner</option>
 			<option value="corner-br">Bottom Right Corner</option>
+			<option value="stripes-vertical">Vertical Stripes</option>
+			<option value="cross-streight">Streight Lines Cross</option>
 		</select><select id="banner-layer1-colour" onchange="updateLayer(1)">
 			<option value"#191919">Black</option>
 			<option value"#993333">Red</option>
