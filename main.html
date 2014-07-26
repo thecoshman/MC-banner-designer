@@ -55,7 +55,7 @@ function updateLayer(layer) {
 	if(pattern == '') {
 		if(layerPresent(layer + 1) && !layerPresent(layer + 2)){
 			// I'm the penultimate layer
-			var lastLayerPattern = document.getElementById('banner-layer' + (layer + 1) + '-pattern').value;
+			var lastLayerPattern = document.getElementById('banner-layer' + layer + '-pattern').value;
 			if(lastLayerPattern == ''){
 				hardRemoveLayer(layer + 1);
 			}
@@ -78,23 +78,38 @@ function updateLayer(layer) {
 		for (i = 0; i < 7; i+=2) { 
     		ctx.fillRect(lineWidth/2 + (i * lineWidth), 0, lineWidth, height);
 		}
-		//ctx.fillRect(lineWidth/2 + (0 * lineWidth), 0, lineWidth, height);
-		//ctx.fillRect(lineWidth/2 + (2 * lineWidth), 0, lineWidth, height);
-		//ctx.fillRect(lineWidth/2 + (4 * lineWidth), 0, lineWidth, height);
-		//ctx.fillRect(lineWidth/2 + (6 * lineWidth), 0, lineWidth, height);
 	}
 	else if(pattern == 'cross-streight') { ctx.fillStyle = colour; ctx.fillRect((width - (width/5))/2, 0, width/5, height); ctx.fillRect(0, (height - (height/6)) /2, 100, height/6); }
 	if(!layerPresent(layer + 1)){
 		addLayer(layer + 1);
 	}
+	else if(pattern == 'solid') {ctx.fillStyle = colour; ctx.fillRect(0, 0, width, height); }
 }
 </script>
 </head>
 <body>
 	<p>Yeah, I know this is crude, it's a work in progress.</p>
 	<p>View the source on <a href="https://github.com/thecoshman/MC-banner-designer">github</a> if you like.</p>
-	<p>I am aware that a few colours do not work when you select them... not sure why. (Light Grey, Lime Green and Light Blue</p>
 	<form id="banner-options">
+		<input type="hidden" id="banner-layer0-pattern" value="solid"></input>
+		Background Colour: <select id="banner-layer0-colour" onchange="updateLayer(0)">
+			<option value"#191919">Black</option>
+			<option value"#993333">Red</option>
+			<option value"#667F33">Green</option>
+			<option value"#664C33">Brown</option>
+			<option value"#334CB2">Blue</option>
+			<option value"#7F3FB2">Purple</option>
+			<option value"#4C7F99">Cyan</option>
+			<option value"#999999">LightGrey</option>
+			<option value"#4C4C4C">Grey</option>
+			<option value"#F27FA5">Pink</option>
+			<option value"#7FCC19">LimeGreen</option>
+			<option value"#E5E533">Yellow</option>
+			<option value"#6699D8">LightBlue</option>
+			<option value"#B24CD8">Magenta</option>
+			<option value"#D87F33">Orange</option>
+			<option value"#FFFFFF">White</option>
+		</select><br>
 		<select id="banner-layer1-pattern" onchange="updateLayer(1)">
 			<option value="">Blank</option>
 			<option value="third-top">Top Third</option>
@@ -117,12 +132,12 @@ function updateLayer(layer) {
 			<option value"#334CB2">Blue</option>
 			<option value"#7F3FB2">Purple</option>
 			<option value"#4C7F99">Cyan</option>
-			<option value"#999999">Light Grey</option>
+			<option value"#999999">LightGrey</option>
 			<option value"#4C4C4C">Grey</option>
 			<option value"#F27FA5">Pink</option>
-			<option value"#7FCC19">Lime Green</option>
+			<option value"#7FCC19">LimeGreen</option>
 			<option value"#E5E533">Yellow</option>
-			<option value"#6699D8">Light Blue</option>
+			<option value"#6699D8">LightBlue</option>
 			<option value"#B24CD8">Magenta</option>
 			<option value"#D87F33">Orange</option>
 			<option value"#FFFFFF">White</option>
@@ -130,7 +145,8 @@ function updateLayer(layer) {
 	</form>
 
 	<div id="banner-layers" style="position: relative;">
- 		<canvas id="banner-layer1" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+ 		<canvas id="banner-layer0" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 0;"></canvas>
+ 		<canvas id="banner-layer1" width="100" height="150" style="border:1px solid #000000; position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
 	</div>
 </body>
 </html>
